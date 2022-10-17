@@ -4,7 +4,6 @@ package com.example.demopatiensdentins;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Date;
 
 @Entity
 @Table
@@ -24,8 +23,6 @@ public class Patiens {
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    @Transient
-    private Integer age;
     private Long cedula;
     private String sex;
     private Double altura;
@@ -36,11 +33,14 @@ public class Patiens {
     private String chronicDisease;
     private String medicineUse;
     private LocalDate medicalAppointment;
+    @Transient
+    private Integer age;
 
     public Patiens() {
     }
 
-    public Patiens(String firstName, String lastName, LocalDate dob, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
+    public Patiens(Long id, String firstName, String lastName, LocalDate dob, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
@@ -56,8 +56,7 @@ public class Patiens {
         this.medicalAppointment = medicalAppointment;
     }
 
-    public Patiens(Long id, String firstName, String lastName, LocalDate dob, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
-        this.id = id;
+    public Patiens(String firstName, String lastName, LocalDate dob, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
@@ -108,7 +107,6 @@ public class Patiens {
     public Integer getAge() {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
-
     public void setAge(Integer age) {
         this.age = age;
     }

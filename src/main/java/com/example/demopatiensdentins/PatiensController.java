@@ -1,9 +1,7 @@
 package com.example.demopatiensdentins;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,6 +10,7 @@ import java.util.List;
 public class PatiensController {
 
     private final PatiensService patiensService;
+    PatiensRepository repo;
 
     @Autowired
 
@@ -23,4 +22,16 @@ public class PatiensController {
     public List<Patiens> getPatiens(){
         return patiensService.getPatiens();
     }
+
+    @PostMapping
+    public void addPatiens(@RequestBody Patiens patiens){
+        patiensService.addPatiens(patiens);
+    }
+
+    @DeleteMapping(path = "{patiens}")
+    public void deletePatiens(@PathVariable("patiens") Long patiensId){
+        patiensService.deletePatiens(patiensId);
+    }
+
+    @PutMapping
 }
