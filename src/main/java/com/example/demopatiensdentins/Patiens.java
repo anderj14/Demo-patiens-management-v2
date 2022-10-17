@@ -3,6 +3,7 @@ package com.example.demopatiensdentins;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,6 @@ public class Patiens {
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "patience_sequence"
-
     )
 
     private Long id;
@@ -40,11 +40,10 @@ public class Patiens {
     public Patiens() {
     }
 
-    public Patiens(String firstName, String lastName, LocalDate dob, Integer age, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
+    public Patiens(String firstName, String lastName, LocalDate dob, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
-        this.age = age;
         this.cedula = cedula;
         this.sex = sex;
         this.altura = altura;
@@ -57,12 +56,11 @@ public class Patiens {
         this.medicalAppointment = medicalAppointment;
     }
 
-    public Patiens(Long id, String firstName, String lastName, LocalDate dob, Integer age, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
+    public Patiens(Long id, String firstName, String lastName, LocalDate dob, Long cedula, String sex, Double altura, Double peso, String disease, String treatment, String historyDiseases, String chronicDisease, String medicineUse, LocalDate medicalAppointment) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
-        this.age = age;
         this.cedula = cedula;
         this.sex = sex;
         this.altura = altura;
@@ -108,7 +106,7 @@ public class Patiens {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
